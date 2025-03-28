@@ -13,7 +13,7 @@ logging.basicConfig(
 )
 
 class FileOrganizerHandler(LoggingEventHandler):
-    """Custom event handler for file organization."""
+    # Custom event handler for file organization.
 
     # Expanded file categories and their extensions
     FILE_CATEGORIES = {
@@ -36,7 +36,7 @@ class FileOrganizerHandler(LoggingEventHandler):
         self.processed_files = set()
 
     def _create_extension_map(self):
-        """Create reverse mapping from extensions to categories."""
+        # Create reverse mapping from extensions to categories.
         mapping = {}
         for category, exts in self.FILE_CATEGORIES.items():
             for ext in exts:
@@ -44,7 +44,7 @@ class FileOrganizerHandler(LoggingEventHandler):
         return mapping
 
     def on_created(self, event):
-        """Handle file creation event with safety checks."""
+        # Handle file creation event with safety checks.
         if event.is_directory:
             return
 
@@ -56,7 +56,7 @@ class FileOrganizerHandler(LoggingEventHandler):
             self._organize_file(file_path)
 
     def _get_unique_path(self, destination, filename):
-        """Handle duplicate filenames by adding suffixes."""
+        # Handle duplicate filenames by adding suffixes.
         base, ext = os.path.splitext(filename)
         counter = 1
         new_name = filename
@@ -68,7 +68,7 @@ class FileOrganizerHandler(LoggingEventHandler):
         return os.path.join(destination, new_name)
 
     def _organize_file(self, file_path):
-        """Organize file into appropriate category directory."""
+        # Organize file into appropriate category directory.
         try:
             if not os.path.isfile(file_path):
                 return
@@ -83,10 +83,10 @@ class FileOrganizerHandler(LoggingEventHandler):
             dest_path = self._get_unique_path(dest_dir, filename)
             shutil.move(file_path, dest_path)
 
-            logging.info(f"Arquivo '{filename}' movido para {category}")
+            logging.info(f"File '{filename}' moved to {category}")
 
         except Exception as e:
-            logging.error(f"Erro ao processar {file_path}: {str(e)}")
+            logging.error(f"Error processing {file_path}: {str(e)}")
 
 
 def main():
@@ -98,12 +98,12 @@ def main():
 
     try:
         observer.start()
-        logging.info(f"Monitoramento iniciado em {source_directory}")
+        logging.info(f"Monitoring started in {source_directory}")
         while True:
             time.sleep(5)
     except KeyboardInterrupt:
         observer.stop()
-        logging.info("Monitoramento encerrado pelo usuário")
+        logging.info("Monitoring terminated by user")
     finally:
         observer.join()
 
