@@ -75,7 +75,7 @@ class FileOrganizerHandler(LoggingEventHandler):
 
             filename = os.path.basename(file_path)
             _, ext = os.path.splitext(filename)
-            category = self.extension_map.get(ext.lower(), "Outros")
+            category = self.extension_map.get(ext.lower(), "Others")
 
             dest_dir = os.path.join(self.source_dir, category)
             os.makedirs(dest_dir, exist_ok=True)
@@ -90,7 +90,7 @@ class FileOrganizerHandler(LoggingEventHandler):
 
 
 def main():
-    source_directory = "C:/Users/Daniel/Downloads"
+    source_directory = "C:/Users/yourpath/Downloads"
 
     event_handler = FileOrganizerHandler(source_directory)
     observer = Observer()
