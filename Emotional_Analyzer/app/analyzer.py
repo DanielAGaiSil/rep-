@@ -64,7 +64,7 @@ class SentimentAnalyzer:
                 "confidence": 'error'
             }
         
-    def analyze_batch(self, text):
+    def analyze_batch(self, texts):
         # Analyzes sentiment for a list of texts
         # Arguments: texts(list): List of texts to analyze
         # Returning: list: List of analysis results
