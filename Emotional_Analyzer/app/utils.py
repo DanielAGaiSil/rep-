@@ -19,30 +19,29 @@ def download_nltk_data():
         nltk.download("stopwords", quiet = True)
 
 def clean_text(text):
-    # Preprocesses text to analyze
+    # Preprocess text for analysis
+    
     if not isinstance(text, str):
         return ""
-
-    # Convert text to lowercase
-    text = text.lower()
-
-    # Remove punctuation but keeps spaces
-    text = re.sub(r"[^\w\s]", "", text)
     
-    # Removes extra whitespaces 
-    text = re.sub(r"\s+", "", text).strip()
-
+    # Convert to lowercase
+    text = text.lower()
+    
+    # Remove punctuation but keep spaces
+    text = re.sub(r'[^\w\s]', '', text)
+    
+    # Remove extra whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+    
     try:
         # Tokenize
-
         words = nltk.word_tokenize(text)
-
-        # Removes stopwords and short words
-        stop_words = set(stopwords.words("english"))
-        words = [word for word in words if not word in stop_words and len(word) > 2]
-
+        
+        # Remove stopwords and short words
+        stop_words = set(stopwords.words('english'))
+        words = [word for word in words if word not in stop_words and len(word) > 2]
+        
         return " ".join(words)
-    
     except Exception as e:
         print(f"Error in text cleaning: {e}")
         return text

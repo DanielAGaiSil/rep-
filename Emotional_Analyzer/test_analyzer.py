@@ -16,7 +16,7 @@ class TestSentimentAnalyzer(unittest.TestCase):
         cls.analyzer = SentimentAnalyzer()
     
     def test_positive_sentiment(self):
-        """Test positive sentiment detection"""
+        # Test positive sentiment detection
         positive_texts = [
             "I love this! It's amazing and wonderful.",
             "This is fantastic and great!",
@@ -30,7 +30,7 @@ class TestSentimentAnalyzer(unittest.TestCase):
                 self.assertGreater(result['polarity'], 0)
     
     def test_negative_sentiment(self):
-        """Test negative sentiment detection"""
+        # Test negative sentiment detection
         negative_texts = [
             "I hate this! It's terrible and awful.",
             "This is horrible and disgusting!",
@@ -44,7 +44,7 @@ class TestSentimentAnalyzer(unittest.TestCase):
                 self.assertLess(result['polarity'], 0)
     
     def test_neutral_sentiment(self):
-        """Test neutral sentiment detection"""
+        # Test neutral sentiment detection
         neutral_texts = [
             "This is a pencil.",
             "The weather is cloudy today.",
@@ -58,7 +58,7 @@ class TestSentimentAnalyzer(unittest.TestCase):
                 self.assertAlmostEqual(result['polarity'], 0, delta=0.15)
     
     def test_empty_text(self):
-        """Test handling of empty text"""
+        # Test handling of empty text
         result = self.analyzer.analyze_sentiment("")
         self.assertEqual(result['sentiment'], 'neutral')
         self.assertEqual(result['polarity'], 0.0)

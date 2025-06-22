@@ -13,13 +13,14 @@ class SentimentAnalyzer:
         # Then returns: dict: dictionary containing analysis results
         if not text or not isinstance(text, str):
             return {
-                "text": text,
-                "cleaned_text": "",
-                "polarity": 0.0,
-                "subjectivity": 0.0,
-                "sentiment": 0.0,
-                "confidence": "low"
+                'text': text,
+                'cleaned_text': '',
+                'polarity': 0.0,
+                'subjectivity': 0.0,
+                'sentiment': 'neutral',
+                'confidence': 'low'
             }
+        
         try:
             # This calls clean_text in order to standardize text
             # Eg: clean_text("I LOVE this product! It's AMAZING!") returns: "love product amazing"
@@ -35,42 +36,43 @@ class SentimentAnalyzer:
             # Determines sentimnents depending on confidence level
 
             if polarity > 0.1:
-                sentiment = "positive"
-                confidence = "high" if polarity > 0.5 else "medium"
+                sentiment = 'positive'
+                confidence = 'high' if polarity > 0.5 else 'medium'
             elif polarity < -0.1:
-                sentiment = "negative"
-                confidence = "high" if polarity < -0.5 else "medium"
+                sentiment = 'negative'
+                confidence = 'high' if polarity < -0.5 else 'medium'
             else:
-                sentiment = "neutral"
-                confidence = "low"
+                sentiment = 'neutral'
+                confidence = 'low'
             
             return {
-                "text": text,
-                "cleaned_text": cleaned,
-                "polarity": round(polarity, 4),
-                "subjectivity": round(subjectivity, 4),
-                "sentiment": sentiment,
-                "confidence": confidence
+                'text': text,
+                'cleaned_text': cleaned,
+                'polarity': round(polarity, 4),
+                'subjectivity': round(subjectivity, 4),
+                'sentiment': sentiment,
+                'confidence': confidence
             }
-        
+            
         except Exception as e:
-            print(f"Error  analyzing content: {e}")
+            print(f"Error analyzing sentiment: {e}")
             return {
-                "text": text,
-                "cleaned_text": '',
-                "polarity": 0.0,
-                "subjectivity": 0.0,
-                "sentiment": 'neutral',
-                "confidence": 'error'
+                'text': text,
+                'cleaned_text': '',
+                'polarity': 0.0,
+                'subjectivity': 0.0,
+                'sentiment': 'neutral',
+                'confidence': 'error'
             }
-        
+
     def analyze_batch(self, texts):
         # Analyzes sentiment for a list of texts
         # Arguments: texts(list): List of texts to analyze
         # Returning: list: List of analysis results
+
         results = []
         for i, text in enumerate(texts):
             if i % 100 == 0 and i > 0:
-                print(f"Processed {i} texts.")
-                results.append(self.analyze_sentiment(text))
-        return results
+                print(f"Processed {i} texts...")
+            results.append(self.analyze_sentiment(text))
+        return result
