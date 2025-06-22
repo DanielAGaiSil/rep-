@@ -75,4 +75,4 @@ class SentimentAnalyzer:
             if i % 100 == 0 and i > 0:
                 print(f"Processed {i} texts...")
             results.append(self.analyze_sentiment(text))
-        return result
+        return results
