@@ -1,4 +1,3 @@
-
 #Personal Finance Tracker
 #- Add income/expenses with categories
 #- View spending breakdown by category
